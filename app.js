@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const express = require('express');
 const chalk = require('chalk');
 const debug = require('debug')('app');
@@ -21,8 +22,11 @@ const nav = [
 ];
 
 const bookRouter = require('./src/routes/bookRoutes')(nav);
+const adminRouter = require('./src/routes/adminRoutes')(nav);
+
 
 app.use('/books', bookRouter);
+app.use('/admin', adminRouter);
 app.use('/authors', bookRouter);
 
 app.get('/', (req, res) => {
