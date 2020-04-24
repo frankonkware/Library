@@ -1,5 +1,6 @@
+/* eslint-disable linebreak-style */
 const passport = require('passport');
-require('./stratergies/local.stratergy')();
+require('./stratergies/local.strategy')();
 
 module.exports = function passportConfig(app) {
   app.use(passport.initialize());
@@ -12,9 +13,6 @@ module.exports = function passportConfig(app) {
 
   // retrieve user from session
   passport.deserializeUser((user, done) => {
-
     done(null, user);
   });
-
-
-}
+};

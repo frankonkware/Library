@@ -39,7 +39,7 @@ function router(nav) {
     .get((req, res) => {
       res.render('signin', {
         nav,
-        title: 'signIn'
+        title: 'sign In'
       });
     })
     .post(passport.authenticate('local', {
@@ -47,6 +47,13 @@ function router(nav) {
       failureRedirect: '/'
     }));
   authRouter.route('/profile')
+    .all((req, res, next) =>{
+      if (req.user) {
+        next();
+      } else {
+        res.redirect('/');
+      }
+    })
     .get((req, res) => {
       res.json(req.user);
     });
