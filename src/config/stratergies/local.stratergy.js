@@ -1,8 +1,8 @@
 const passport = require('passport');
-const { Stratergy } = require('passport-local');
+const { Strategy } = require('passport-local');
 
-module.exports = function localStratergy() {
-  passport.use(new Stratergy(
+module.exports = function localStrategy() {
+  passport.use(new Strategy(
     {
       usernameField: 'username',
       passwordField: 'password'

@@ -2,10 +2,11 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:authRoutes');
+const passport = require('passport');
 
 const authRouter = express.Router();
 
-function router() {
+function router(nav) {
   authRouter.route('/signUp')
     .post((req, res) => {
       const { username, password } = req.body;
@@ -23,18 +24,28 @@ function router() {
           const user = { username, password };
           const results = await col.insertOne(user);
           debug(results);
+          // create user
+          req.login(results.ops[0], () => {
+            res.redirect('/auth/profile');
+          });
+
 
         } catch (err) {
           debug(err);
         }
       }());
-      debug(req.body);
-      // create user
-      req.login(req.body, () => {
-        res.redirect('/auth/profile');
-      });
     });
-
+  authRouter.route('/signin')
+    .get((req, res) => {
+      res.render('signin', {
+        nav,
+        title: 'signIn'
+      });
+    })
+    .post(passport.authenticate('local', {
+      successRedirect: '/auth/profile',
+      failureRedirect: '/'
+    }));
   authRouter.route('/profile')
     .get((req, res) => {
       res.json(req.user);
