@@ -11,7 +11,7 @@ module.exports = function localStrategy() {
       usernameField: 'username',
       passwordField: 'password'
     }, (username, password, done) => {
-      const url = 'mongodb://library:QyL8cZDlHh9llGN7%40ds151124.mlab.com:51124/heroku_tk7cnp1d';
+      const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
       const dbName = 'libraryApp';
       (async function mongo() {
         let client;
