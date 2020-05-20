@@ -12,7 +12,7 @@ module.exports = function localStrategy() {
       passwordField: 'password'
     }, (username, password, done) => {
       const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
-      const dbName = 'libraryApp';
+      const dbName = 'heroku_tk7cnp1d';
       (async function mongo() {
         let client;
 
