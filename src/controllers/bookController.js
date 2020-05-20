@@ -4,8 +4,8 @@ const debug = require('debug')('app:bookController');
 
 function bookController(bookService, nav) {
   function getIndex(req, res) {
-    const url = 'mongodb://library/QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
-    const dbName = 'libraryApp';
+    const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
+    const dbName = 'heroku_tk7cnp1d';
 
     (async function mongo() {
       let client;
