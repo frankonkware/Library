@@ -1,15 +1,19 @@
 /* eslint-disable linebreak-style */
+require('dotenv').config();
 const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:bookController');
 
 function bookController(bookService, nav) {
   function getIndex(req, res) {
-    const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
-    const dbName = 'heroku_tk7cnp1d';
+    const url = process.env.DATABASE_URL;
+    const dbName = process.env.DATABASE_NAME;
+
 
     (async function mongo() {
       let client;
       try {
+        console.log(url);
+        console.log(dbName);
         client = await MongoClient.connect(url);
         debug('Connected correctly to server');
 
@@ -33,8 +37,8 @@ function bookController(bookService, nav) {
   }
   function getById(req, res) {
     const { id } = req.params;
-    const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
-    const dbName = 'heroku_tk7cnp1d';
+    const url = process.env.DATABASE_URL;
+    const dbName = process.env.DATABASE_NAME;
 
     (async function mongo() {
       let client;

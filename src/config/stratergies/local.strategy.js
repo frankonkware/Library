@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+require('dotenv').config();
 const passport = require('passport');
 const { Strategy } = require('passport-local');
 const { MongoClient } = require('mongodb');
@@ -11,8 +12,8 @@ module.exports = function localStrategy() {
       usernameField: 'username',
       passwordField: 'password'
     }, (username, password, done) => {
-      const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
-      const dbName = 'heroku_tk7cnp1d';
+      const url = process.env.DATABASE_URL;
+      const dbName = process.env.DATABASE_NAME;
       (async function mongo() {
         let client;
 
@@ -35,7 +36,7 @@ module.exports = function localStrategy() {
           console.log(err.stack);
         }
 
-       // client.close();
+        // client.close();
       }());
     }
   ));

@@ -1,8 +1,10 @@
 /* eslint-disable linebreak-style */
+require('dotenv').config();
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:authRoutes');
 const passport = require('passport');
+
 
 const authRouter = express.Router();
 
@@ -10,12 +12,14 @@ function router(nav) {
   authRouter.route('/signUp')
     .post((req, res) => {
       const { username, password } = req.body;
-      const url = 'mongodb://library:QyL8cZDlHh9llGN7@ds151124.mlab.com:51124/heroku_tk7cnp1d';
-      const dbName = 'heroku_tk7cnp1d';
+      const url = process.env.DATABASE_URL;
+      const dbName = process.env.DATABASE_NAME;
 
       (async function addUser() {
         let client;
         try {
+          console.log(url);
+          console.log(dbName);
           client = await MongoClient.connect(url);
           debug('Connected correctly to server');
 
